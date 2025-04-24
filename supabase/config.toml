@@ -1,0 +1,4 @@
+project_id = "jijtsfgzmpxqfqwxyqnv"
+
+[functions.get-minio-image]
+verify_jwt = false
