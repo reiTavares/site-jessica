@@ -7,6 +7,7 @@ import LoanTypeSelect from './form/LoanTypeSelect';
 import SubmitButton from './form/SubmitButton';
 import { formatPhone, formatCPF, formatCurrency } from '@/utils/formatters';
 import { validateCPF, validatePhone } from '@/utils/validators';
+import { sendMetaConversion } from '@/utils/metaConversions';
 
 const SimulationForm: React.FC = () => {
   const [name, setName] = useState('');
@@ -16,7 +17,6 @@ const SimulationForm: React.FC = () => {
   const [amount, setAmount] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // Form validation
   const [errors, setErrors] = useState({
     name: '',
     phone: '',
@@ -151,7 +151,16 @@ const SimulationForm: React.FC = () => {
         throw new Error('Failed to submit form');
       }
 
-      const firstName = name.split(' ')[0];
+      const nameParts = name.trim().split(' ');
+      const firstName = nameParts[0];
+      const lastName = nameParts.slice(1).join(' ');
+
+      await sendMetaConversion({
+        phone,
+        firstName,
+        lastName,
+      });
+
       navigate('/obrigado', { state: { firstName, cpf } });
     } catch (error) {
       toast({
@@ -164,7 +173,6 @@ const SimulationForm: React.FC = () => {
   };
 
   useEffect(() => {
-    // Add animation classes to the tailwind config
     const style = document.createElement('style');
     style.textContent = `
       @keyframes shake {

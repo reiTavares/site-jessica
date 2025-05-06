@@ -10,7 +10,7 @@ const ThankYou: React.FC = () => {
     return <Navigate to="/" replace />;
   }
 
-  const whatsappLink = `https://wa.me/5561996068727?text=Ol%C3%A1%20acabei%20de%20cadastrar%20no%20site%20e%20quero%20agilizar%20meu%20empr%C3%A9stimo%0AMeu%20nome%20%${firstName}20e%20CPF%20%${cpf}`;
+  const whatsappLink = `https://wa.me/5561996068727?text=Olá acabei de cadastrar no site e quero agilizar meu empréstimo. Meu nome é ${firstName} e CPF ${cpf}`;
 
   return (
     <MainLayout>
